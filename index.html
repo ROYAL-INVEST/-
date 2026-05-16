@@ -1,0 +1,3093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal invest</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial,sans-serif;color:#fff;
+  background: #0a0015;
+  background-image: 
+    radial-gradient(ellipse 600px 400px at 10% 20%, rgba(147,51,234,0.15) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 500px at 85% 15%, rgba(59,130,246,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 700px 400px at 50% 80%, rgba(236,72,153,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 300px 300px at 30% 60%, rgba(34,211,238,0.06) 0%, transparent 70%),
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(180deg, #0a0015 0%, #0d001a 30%, #100020 60%, #0a0015 100%);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px, 100% 100%;
+  background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+  min-height: 100vh;
+}
+a{text-decoration:none;color:#fff}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  background: linear-gradient(135deg, rgba(20,5,40,0.8), rgba(10,0,25,0.9));
+  border-bottom: 1px solid rgba(255,215,0,0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+nav::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.2), rgba(147,51,234,0.3), rgba(255,215,0,0.2), transparent);
+}
+
+.brand {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #ffd700, #ff8c00, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand::before {
+  content: '◈';
+  font-size: 18px;
+  -webkit-text-fill-color: initial;
+  color: rgba(255,215,0,0.4);
+}
+
+.nav-right {
+  position: relative;
+}
+
+.menu-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255,215,0,0.08), rgba(147,51,234,0.08));
+  border: 1px solid rgba(255,215,0,0.12);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(147,51,234,0.1));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.menu-btn:hover::before {
+  opacity: 1;
+}
+
+.menu-btn:hover {
+  transform: scale(1.08);
+  border-color: rgba(255,215,0,0.25);
+  box-shadow: 0 4px 25px rgba(255,215,0,0.12);
+}
+
+.menu-btn:active {
+  transform: scale(0.93);
+}
+
+.menu-btn .line {
+  width: 20px;
+  height: 2px;
+  background: linear-gradient(90deg, #ffd700, #a855f7);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 8px rgba(255,215,0,0.15);
+}
+
+.menu-btn:hover .line {
+  width: 24px;
+  box-shadow: 0 0 12px rgba(255,215,0,0.25);
+}
+
+.menu-btn:hover .line:nth-child(2) {
+  width: 18px;
+}
+
+#menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 999;
+}
+
+#menu {
+  display: none;
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  background: linear-gradient(135deg, rgba(20,5,40,0.98), rgba(10,0,25,0.98));
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,215,0,0.2);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 60px rgba(255,215,0,0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  min-width: 220px;
+  z-index: 1000;
+  animation: menuSlideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes menuSlideIn {
+  0% { opacity: 0; transform: translateY(-10px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+#menu .menu-header {
+  text-align: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,215,0,0.1);
+  margin-bottom: 12px;
+}
+
+#menu .menu-header .crown-icon {
+  font-size: 28px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+#menu .menu-header .menu-title {
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #ffd700, #ffaa00, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Times New Roman', Georgia, serif;
+}
+
+#menu .menu-header .menu-subtitle {
+  font-size: 11px;
+  color: rgba(255,215,0,0.4);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+#menu .btn {
+  display: block;
+  padding: 14px 28px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,215,0,0.1);
+  background: linear-gradient(135deg, rgba(255,215,0,0.05), rgba(147,51,234,0.05));
+  color: #ffd700;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  text-align: center;
+  cursor: pointer;
+}
+
+#menu .btn:hover {
+  background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(147,51,234,0.15));
+  border-color: rgba(255,215,0,0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255,215,0,0.1);
+}
+
+#menu .btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+#menu .close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 18px;
+  color: rgba(255,215,0,0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: none;
+  border: none;
+  font-family: Arial, sans-serif;
+}
+
+#menu .close-btn:hover {
+  color: #ffd700;
+  transform: rotate(90deg);
+}
+
+.hero {
+  text-align: center;
+  padding: 50px 20px 40px;
+  position: relative;
+}
+
+.royal-logo {
+  width: 130px;
+  height: 130px;
+  margin: 0 auto 16px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at 40% 30%, #2d1a00, #0d0015 80%);
+  border-radius: 50%;
+  border: 2px solid rgba(255,215,0,0.2);
+  box-shadow: 
+    0 0 60px rgba(255,215,0,0.06),
+    0 0 120px rgba(255,215,0,0.03),
+    inset 0 0 40px rgba(255,215,0,0.04);
+  animation: logoGlow 3s ease-in-out infinite;
+}
+
+@keyframes logoGlow {
+  0%, 100% { box-shadow: 0 0 60px rgba(255,215,0,0.06), 0 0 120px rgba(255,215,0,0.03), inset 0 0 40px rgba(255,215,0,0.04); }
+  50% { box-shadow: 0 0 80px rgba(255,215,0,0.1), 0 0 150px rgba(255,215,0,0.05), inset 0 0 50px rgba(255,215,0,0.06); }
+}
+
+.royal-logo .crown {
+  font-size: 60px;
+  line-height: 1;
+  filter: drop-shadow(0 0 20px rgba(255,215,0,0.3));
+  animation: crownFloat 3s ease-in-out infinite;
+}
+
+@keyframes crownFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-5px) rotate(2deg); }
+}
+
+.royal-logo .crown-shield {
+  position: absolute;
+  bottom: 18px;
+  font-size: 30px;
+  opacity: 0.15;
+  color: #ffd700;
+}
+
+.royal-name {
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #ffd700 0%, #ffaa00 30%, #ffd700 60%, #ffcc00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 6px;
+  position: relative;
+  display: inline-block;
+  text-shadow: none;
+  font-family: 'Times New Roman', Georgia, serif;
+}
+
+.royal-name::before {
+  content: '◈';
+  position: absolute;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  -webkit-text-fill-color: initial;
+  color: rgba(255,215,0,0.2);
+}
+
+.royal-name::after {
+  content: '◈';
+  position: absolute;
+  right: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  -webkit-text-fill-color: initial;
+  color: rgba(255,215,0,0.2);
+}
+
+.royal-divider {
+  width: 200px;
+  height: 1px;
+  margin: 10px auto 14px;
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.2), rgba(147,51,234,0.3), rgba(255,215,0,0.2), transparent);
+  position: relative;
+}
+
+.royal-divider::before {
+  content: '✦';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  color: #ffd700;
+  opacity: 0.6;
+}
+
+.hero h1 {
+  font-size: 52px;
+  margin: 10px 0 14px;
+  background: linear-gradient(135deg, #22d3ee 0%, #a855f7 50%, #f472b6 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: 900;
+  letter-spacing: 1px;
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 17px;
+  letter-spacing: 1px;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.8;
+  padding: 18px 24px;
+  position: relative;
+  background: linear-gradient(135deg, rgba(255,215,0,0.06), rgba(147,51,234,0.06));
+  border: 1px solid rgba(255,215,0,0.12);
+  border-radius: 16px;
+  backdrop-filter: blur(4px);
+  color: rgba(255,255,255,0.92);
+  font-weight: 400;
+  text-shadow: 0 0 30px rgba(255,215,0,0.05);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,215,0,0.08);
+}
+
+.hero p::before {
+  content: '"';
+  font-size: 40px;
+  color: rgba(255,215,0,0.2);
+  position: absolute;
+  left: 10px;
+  top: 2px;
+  font-family: Georgia, serif;
+  font-weight: 700;
+}
+
+.hero p::after {
+  content: '"';
+  font-size: 40px;
+  color: rgba(255,215,0,0.2);
+  position: absolute;
+  right: 10px;
+  bottom: -8px;
+  font-family: Georgia, serif;
+  font-weight: 700;
+}
+
+.hero-glow {
+  width: 300px;
+  height: 1px;
+  margin: 20px auto 0;
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.15), rgba(147,51,234,0.2), rgba(255,215,0,0.15), transparent);
+  position: relative;
+}
+
+.hero-glow::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 5px;
+  background: rgba(255,215,0,0.3);
+  border-radius: 50%;
+  filter: blur(3px);
+}
+
+.btn{padding:10px 22px;border:1px solid #7c3aed;border-radius:12px}.grid{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:25px;padding:20px}
+
+.card {
+  background: radial-gradient(ellipse at 30% 20%, #1a1040, #0a0a1a 80%);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,215,0,0.08);
+  border: 1px solid rgba(255,215,0,0.06);
+}
+
+.card::before {
+  content: '✦';
+  position: absolute;
+  top: 10px;
+  left: 14px;
+  font-size: 14px;
+  color: #ffd700;
+  opacity: 0.3;
+  z-index: 5;
+  text-shadow: 0 0 20px rgba(255,215,0,0.2);
+}
+
+.card::after {
+  content: '✦';
+  position: absolute;
+  bottom: 10px;
+  right: 14px;
+  font-size: 14px;
+  color: #ffd700;
+  opacity: 0.3;
+  z-index: 5;
+  text-shadow: 0 0 20px rgba(255,215,0,0.2);
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(255,215,0,0.25);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(255,215,0,0.05), inset 0 1px 0 rgba(255,215,0,0.15);
+}
+
+.top {
+  padding: 18px 18px 20px;
+  text-align: center;
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,215,0,0.04) 0%, rgba(255,215,0,0.01) 50%, transparent 100%);
+  border-bottom: 1px solid rgba(255,215,0,0.06);
+  overflow: hidden;
+}
+
+.top::before {
+  content: '◈';
+  position: absolute;
+  font-size: 160px;
+  opacity: 0.02;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffd700;
+  font-weight: 100;
+}
+
+.title-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #1a0e00 0%, #2d1a00 50%, #1a0e00 100%);
+  color: #ffd700;
+  font-size: 12px;
+  font-weight: 900;
+  padding: 7px 22px;
+  border-radius: 30px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  z-index: 10;
+  border: 1px solid rgba(255,215,0,0.3);
+  box-shadow: 0 0 20px rgba(255,215,0,0.1), inset 0 1px 0 rgba(255,215,0,0.2), inset 0 -1px 0 rgba(0,0,0,0.3);
+  text-shadow: 0 0 15px rgba(255,215,0,0.2);
+  margin-bottom: 16px;
+  position: relative;
+  transform: translateY(-4px);
+}
+
+.invest-label {
+  font-size: 16px !important;
+  font-weight: 900 !important;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: rgba(255,215,0,0.7) !important;
+  position: relative;
+  z-index: 1;
+  margin-top: 4px;
+}
+
+.invest-label::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.5), transparent);
+  margin: 10px auto 0;
+}
+
+.invest-value {
+  font-size: 48px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  margin-top: 10px;
+  line-height: 1;
+  font-family: 'Times New Roman', Georgia, serif;
+  background: linear-gradient(180deg, #ffd700 0%, #ff8c00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+}
+
+.content {
+  padding: 16px 20px 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 8px;
+  margin: 0 -8px;
+  border-radius: 10px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.row:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 8px;
+  right: 8px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.06), rgba(255,215,0,0.1), rgba(255,215,0,0.06), transparent);
+}
+
+.row:hover {
+  background: rgba(255,215,0,0.03);
+  transform: translateX(4px);
+}
+
+.row .label {
+  color: rgba(255,255,255,0.35);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.row .value {
+  font-weight: 800;
+  font-size: 18px;
+  color: #fff;
+  letter-spacing: 0.3px;
+}
+
+.row .value.gold {
+  color: #ffd700;
+  text-shadow: 0 0 20px rgba(255,215,0,0.1);
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 19px;
+}
+
+.row .value.green {
+  color: #34d399;
+  text-shadow: 0 0 20px rgba(52,211,153,0.1);
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 19px;
+}
+
+.icon {
+  font-size: 15px;
+  opacity: 0.35;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: sepia(0.5) brightness(0.8);
+}
+
+.row:hover .icon {
+  opacity: 1;
+  transform: scale(1.3) rotate(0deg);
+  filter: sepia(0) brightness(1);
+}
+
+.buy {
+  display: block;
+  text-align: center;
+  margin-top: 22px;
+  padding: 15px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #b8860b, #ffd700, #b8860b);
+  color: #1a0a00;
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(255,215,0,0.15), inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -1px 0 rgba(0,0,0,0.1);
+}
+
+.buy::before {
+  content: '✦';
+  margin-right: 8px;
+  font-size: 12px;
+}
+
+.buy::after {
+  content: '✦';
+  margin-left: 8px;
+  font-size: 12px;
+}
+
+.buy:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(255,215,0,0.3), 0 0 60px rgba(255,215,0,0.05), inset 0 1px 0 rgba(255,255,255,0.4);
+  background: linear-gradient(135deg, #daa520, #ffd700, #daa520);
+}
+
+.buy:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.features{max-width:1200px;margin:30px auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;padding:0 20px}.feature{padding:20px;border:1px solid rgba(255,255,255,.1);border-radius:16px;background:rgba(255,255,255,.04)}footer{text-align:center;color:#bbb;padding:25px}
+
+/* ===== AUTH POPUP STYLES ===== */
+#auth-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+#auth-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 420px;
+  max-width: 92vw;
+  background: linear-gradient(160deg, rgba(25,8,45,0.99), rgba(8,0,22,0.99));
+  border-radius: 24px;
+  border: 1px solid rgba(255,215,0,0.18);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 80px rgba(255,215,0,0.06);
+  padding: 36px 32px 32px;
+  z-index: 2001;
+  animation: popupSlide 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popupSlide {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+#auth-popup .auth-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 22px;
+  color: rgba(255,215,0,0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: none;
+  border: none;
+  font-family: Arial, sans-serif;
+}
+
+#auth-popup .auth-close:hover {
+  color: #ffd700;
+  transform: rotate(90deg);
+}
+
+#auth-popup .auth-crown {
+  text-align: center;
+  font-size: 42px;
+  margin-bottom: 4px;
+  display: block;
+  filter: drop-shadow(0 0 15px rgba(255,215,0,0.2));
+}
+
+#auth-popup .auth-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #ffd700, #ffaa00, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Times New Roman', Georgia, serif;
+  margin-bottom: 6px;
+}
+
+#auth-popup .auth-subtitle {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255,215,0,0.35);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.auth-tabs {
+  display: flex;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255,215,0,0.12);
+  margin-bottom: 24px;
+  background: rgba(255,255,255,0.02);
+}
+
+.auth-tab {
+  flex: 1;
+  text-align: center;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: rgba(255,255,255,0.3);
+  background: transparent;
+  border: none;
+}
+
+.auth-tab.active {
+  color: #ffd700;
+  background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(147,51,234,0.1));
+  box-shadow: inset 0 2px 0 #ffd700;
+}
+
+.auth-tab:hover:not(.active) {
+  color: rgba(255,215,0,0.6);
+  background: rgba(255,215,0,0.03);
+}
+
+.auth-form {
+  display: block;
+}
+
+.auth-form.hidden {
+  display: none;
+}
+
+.form-group {
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%;
+  padding: 14px 16px;
+  padding-left: 42px;
+  padding-right: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,215,0,0.1);
+  background: rgba(255,255,255,0.04);
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.form-group textarea {
+  padding-left: 16px;
+  min-height: 80px;
+  resize: vertical;
+}
+
+.form-group select option {
+  background: #1a0e00;
+  color: #ffd700;
+}
+
+.form-group input::placeholder, .form-group textarea::placeholder {
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.5px;
+}
+
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+  border-color: rgba(255,215,0,0.3);
+  background: rgba(255,255,255,0.06);
+  box-shadow: 0 0 20px rgba(255,215,0,0.05);
+}
+
+.form-group .input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.pw-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  opacity: 0.35;
+  transition: all 0.3s ease;
+  color: #ffd700;
+  padding: 4px;
+  line-height: 1;
+  font-family: Arial, sans-serif;
+}
+
+.pw-toggle:hover {
+  opacity: 0.8;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.auth-submit {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #b8860b, #ffd700, #b8860b);
+  color: #1a0a00;
+  font-weight: 900;
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 20px rgba(255,215,0,0.12), inset 0 1px 0 rgba(255,255,255,0.3);
+  margin-top: 4px;
+}
+
+.auth-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 35px rgba(255,215,0,0.25);
+  background: linear-gradient(135deg, #daa520, #ffd700, #daa520);
+}
+
+.auth-submit:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.auth-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.1), transparent);
+  margin: 18px 0;
+}
+
+.auth-footer-text {
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.5px;
+}
+
+.auth-footer-text a {
+  color: rgba(255,215,0,0.5);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.auth-footer-text a:hover {
+  color: #ffd700;
+}
+
+/* ===== TOAST NOTIFICATION STYLES ===== */
+#toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 380px;
+  width: 100%;
+}
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,215,0,0.15);
+  background: linear-gradient(135deg, rgba(20,5,40,0.98), rgba(10,0,25,0.98));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 30px rgba(255,215,0,0.04);
+  animation: toastSlide 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.toast::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: 4px 0 0 4px;
+}
+
+.toast.error::before {
+  background: linear-gradient(180deg, #ff4444, #ff6b6b);
+}
+
+.toast.success::before {
+  background: linear-gradient(180deg, #34d399, #6ee7b7);
+}
+
+.toast.warning::before {
+  background: linear-gradient(180deg, #fbbf24, #f59e0b);
+}
+
+@keyframes toastSlide {
+  0% {
+    opacity: 0;
+    transform: translateX(60px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes toastFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(60px) scale(0.9);
+  }
+}
+
+.toast .toast-icon {
+  font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.toast .toast-text {
+  flex: 1;
+}
+
+.toast .toast-title {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
+}
+
+.toast.error .toast-title { color: #ff6b6b; }
+.toast.success .toast-title { color: #34d399; }
+.toast.warning .toast-title { color: #fbbf24; }
+
+.toast .toast-msg {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.4;
+  letter-spacing: 0.3px;
+}
+
+.toast .toast-close {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.2);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 2px;
+  transition: all 0.3s ease;
+  font-family: Arial, sans-serif;
+}
+
+.toast .toast-close:hover {
+  color: rgba(255,255,255,0.6);
+  transform: rotate(90deg);
+}
+
+@media(max-width:700px){
+  #toast-container {
+    top: 12px;
+    right: 12px;
+    left: 12px;
+    max-width: none;
+  }
+  .toast { padding: 14px 16px; }
+}
+
+/* ===== ADMIN LOGIN POPUP ===== */
+#admin-login-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 2002;
+  animation: fadeIn 0.3s ease;
+}
+
+#admin-login-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  max-width: 92vw;
+  background: linear-gradient(160deg, rgba(25,8,45,0.99), rgba(8,0,22,0.99));
+  border-radius: 24px;
+  border: 1px solid rgba(255,215,0,0.18);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 80px rgba(255,215,0,0.06);
+  padding: 36px 32px 32px;
+  z-index: 2003;
+  animation: popupSlide 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#admin-login-popup .auth-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 22px;
+  color: rgba(255,215,0,0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: none;
+  border: none;
+  font-family: Arial, sans-serif;
+}
+
+#admin-login-popup .auth-close:hover {
+  color: #ffd700;
+  transform: rotate(90deg);
+}
+
+#admin-login-popup .admin-login-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #ffd700, #ffaa00, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Times New Roman', Georgia, serif;
+  margin-bottom: 6px;
+}
+
+#admin-login-popup .admin-login-subtitle {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255,215,0,0.35);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+/* ===== DASHBOARD PAGES ===== */
+.dashboard-page {
+  display: none;
+  min-height: 100vh;
+  background: #0a0015;
+  background-image: 
+    radial-gradient(ellipse 600px 400px at 10% 20%, rgba(147,51,234,0.15) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 500px at 85% 15%, rgba(59,130,246,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 700px 400px at 50% 80%, rgba(236,72,153,0.08) 0%, transparent 70%),
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(180deg, #0a0015 0%, #0d001a 30%, #100020 60%, #0a0015 100%);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px, 100% 100%;
+}
+
+.dashboard-page.active {
+  display: block;
+}
+
+.dash-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  background: linear-gradient(135deg, rgba(20,5,40,0.8), rgba(10,0,25,0.9));
+  border-bottom: 1px solid rgba(255,215,0,0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.dash-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.2), rgba(147,51,234,0.3), rgba(255,215,0,0.2), transparent);
+}
+
+.dash-header .dash-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dash-header .dash-logo {
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #ffd700, #ff8c00, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Times New Roman', Georgia, serif;
+}
+
+.dash-header .dash-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.dash-header .dash-user-info .profile-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(147,51,234,0.15));
+  border: 1px solid rgba(255,215,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.dash-logout {
+  padding: 10px 24px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255,50,50,0.15), rgba(200,0,0,0.1));
+  border: 1px solid rgba(255,50,50,0.25);
+  color: #ff6b6b;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dash-logout:hover {
+  background: linear-gradient(135deg, rgba(255,50,50,0.25), rgba(200,0,0,0.2));
+  border-color: rgba(255,50,50,0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255,50,50,0.1);
+}
+
+.dash-logout:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.dash-container {
+  max-width: 1300px;
+  margin: 30px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 25px;
+}
+
+.dash-card {
+  background: radial-gradient(ellipse at 30% 20%, #1a1040, #0a0a1a 80%);
+  border-radius: 16px;
+  border: 1px solid rgba(255,215,0,0.06);
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+}
+
+.dash-card:hover {
+  border-color: rgba(255,215,0,0.15);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+}
+
+.dash-card .dash-card-header {
+  padding: 16px 20px;
+  background: linear-gradient(180deg, rgba(255,215,0,0.04) 0%, transparent 100%);
+  border-bottom: 1px solid rgba(255,215,0,0.06);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dash-card .dash-card-header .card-icon {
+  font-size: 24px;
+}
+
+.dash-card .dash-card-header h3 {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,215,0,0.8);
+}
+
+.dash-card .dash-card-body {
+  padding: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.dash-card .dash-card-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.dash-card .dash-card-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dash-card .dash-card-body::-webkit-scrollbar-thumb {
+  background: rgba(255,215,0,0.2);
+  border-radius: 4px;
+}
+
+.dash-card .dash-card-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,215,0,0.3);
+}
+
+.dash-field {
+  margin-bottom: 16px;
+}
+
+.dash-field label {
+  display: block;
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.dash-field input, .dash-field select, .dash-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,215,0,0.1);
+  background: rgba(255,255,255,0.04);
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.dash-field textarea {
+  min-height: 70px;
+  resize: vertical;
+}
+
+.dash-field input:focus, .dash-field select:focus, .dash-field textarea:focus {
+  border-color: rgba(255,215,0,0.3);
+  background: rgba(255,255,255,0.06);
+}
+
+.dash-field select option {
+  background: #1a0e00;
+  color: #ffd700;
+}
+
+.dash-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #b8860b, #ffd700, #b8860b);
+  color: #1a0a00;
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 20px rgba(255,215,0,0.12);
+  margin-top: 4px;
+}
+
+.dash-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 35px rgba(255,215,0,0.25);
+  background: linear-gradient(135deg, #daa520, #ffd700, #daa520);
+}
+
+.dash-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.dash-btn.red {
+  background: linear-gradient(135deg, #cc3333, #ff4444, #cc3333);
+  box-shadow: 0 4px 20px rgba(255,50,50,0.12);
+}
+
+.dash-btn.red:hover {
+  box-shadow: 0 10px 35px rgba(255,50,50,0.25);
+  background: linear-gradient(135deg, #dd4444, #ff5555, #dd4444);
+}
+
+.dash-btn.green {
+  background: linear-gradient(135deg, #059669, #34d399, #059669);
+  box-shadow: 0 4px 20px rgba(52,211,153,0.12);
+}
+
+.dash-btn.green:hover {
+  box-shadow: 0 10px 35px rgba(52,211,153,0.25);
+  background: linear-gradient(135deg, #10b981, #6ee7b7, #10b981);
+}
+
+.dash-item {
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,215,0,0.06);
+  background: rgba(255,255,255,0.02);
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+.dash-item:hover {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,215,0,0.12);
+}
+
+.dash-item .item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.dash-item .item-row:last-child {
+  margin-bottom: 0;
+}
+
+.dash-item .item-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.dash-item .item-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.dash-item .item-value.gold {
+  color: #ffd700;
+}
+
+.dash-item .item-value.green {
+  color: #34d399;
+}
+
+.dash-item .item-value.red {
+  color: #ff6b6b;
+}
+
+.dash-item .status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.status-badge.pending {
+  background: rgba(251,191,36,0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(251,191,36,0.2);
+}
+
+.status-badge.approved {
+  background: rgba(52,211,153,0.15);
+  color: #34d399;
+  border: 1px solid rgba(52,211,153,0.2);
+}
+
+.status-badge.completed {
+  background: rgba(59,130,246,0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(59,130,246,0.2);
+}
+
+.status-badge.unverified {
+  background: rgba(251,191,36,0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(251,191,36,0.2);
+}
+
+.status-badge.verified {
+  background: rgba(52,211,153,0.15);
+  color: #34d399;
+  border: 1px solid rgba(52,211,153,0.2);
+}
+
+.preview-img {
+  width: 100%;
+  max-height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255,215,0,0.1);
+}
+
+.preview-img:hover {
+  transform: scale(1.02);
+  border-color: rgba(255,215,0,0.3);
+}
+
+/* ===== IMAGE PREVIEW MODAL ===== */
+#img-preview-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.9);
+  backdrop-filter: blur(10px);
+  z-index: 3000;
+  animation: fadeIn 0.3s ease;
+}
+
+#img-preview-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90vw;
+  max-height: 90vh;
+  z-index: 3001;
+  animation: popupSlide 0.3s ease;
+}
+
+#img-preview-modal img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 16px;
+  border: 2px solid rgba(255,215,0,0.2);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+}
+
+.balance-display {
+  text-align: center;
+  padding: 30px;
+}
+
+.balance-display .balance-amount {
+  font-size: 48px;
+  font-weight: 900;
+  font-family: 'Times New Roman', Georgia, serif;
+  background: linear-gradient(180deg, #ffd700 0%, #ff8c00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+}
+
+.balance-display .balance-label {
+  font-size: 14px;
+  color: rgba(255,215,0,0.5);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+.payment-info {
+  text-align: center;
+  padding: 16px;
+  background: rgba(255,215,0,0.04);
+  border-radius: 12px;
+  border: 1px solid rgba(255,215,0,0.1);
+  margin-bottom: 16px;
+}
+
+.payment-info .payment-number {
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffd700;
+  letter-spacing: 1px;
+  font-family: monospace;
+}
+
+.payment-info .payment-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+@media(max-width:700px){
+  nav{padding:12px 18px}.brand{font-size:17px;letter-spacing:2px}.menu-btn{width:38px;height:38px}.menu-btn .line{width:16px}.menu-btn:hover .line{width:20px}.menu-btn:hover .line:nth-child(2){width:14px}.hero h1{font-size:32px !important}.royal-logo{width:100px;height:100px}.royal-logo .crown{font-size:46px}.royal-name{font-size:24px;letter-spacing:4px}.royal-name::before,.royal-name::after{display:none}.hero p{font-size:15px;padding:14px 16px;max-width:95%}.grid{gap:18px;padding:10px}.invest-value{font-size:36px}.invest-label{font-size:14px !important}.title-badge{font-size:10px;padding:5px 16px;transform:translateY(-2px)}#auth-popup{padding:28px 20px 24px}
+  .dash-header{padding:12px 18px;flex-wrap:wrap;gap:10px}
+  .dash-container{grid-template-columns:1fr;padding:0 12px;gap:18px}
+  .dash-card .dash-card-body{max-height:350px}
+  .balance-display .balance-amount{font-size:36px}
+  #admin-login-popup{padding:28px 20px 24px}
+}
+
+/* ===== LANDING PAGE VISIBILITY ===== */
+#landing-page { display: block; }
+#landing-page.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<!-- ===== LANDING PAGE (ORIGINAL - UNCHANGED) ===== -->
+<div id="landing-page">
+<nav>
+  <div class="brand">Royal invest</div>
+  <div class="nav-right">
+    <button class="menu-btn" onclick="toggleMenu()">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </button>
+  </div>
+</nav>
+
+<div id="menu-overlay" onclick="closeMenu()"></div>
+<div id="menu">
+  <button class="close-btn" onclick="closeMenu()">✕</button>
+  <div class="menu-header">
+    <span class="crown-icon">👑</span>
+    <div class="menu-title">Admin Royal</div>
+    <div class="menu-subtitle">✦ Control Panel ✦</div>
+  </div>
+  <a class="btn" href="#" onclick="event.preventDefault(); openAdminLogin(); closeMenu();">⚜ Admin Panel</a>
+</div>
+
+<!-- ===== TOAST CONTAINER ===== -->
+<div id="toast-container"></div>
+
+<!-- ===== AUTH POPUP ===== -->
+<div id="auth-overlay" onclick="closeAuthPopup()"></div>
+<div id="auth-popup">
+  <button class="auth-close" onclick="closeAuthPopup()">✕</button>
+  <span class="auth-crown">👑</span>
+  <div class="auth-title">Royal Access</div>
+  <div class="auth-subtitle">✦ Secure Portal ✦</div>
+
+  <div class="auth-tabs">
+    <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Login</button>
+    <button class="auth-tab" id="tab-signup" onclick="switchAuthTab('signup')">Signup</button>
+  </div>
+
+  <!-- Login Form -->
+  <div class="auth-form" id="form-login">
+    <div class="form-group">
+      <span class="input-icon">👤</span>
+      <input type="text" placeholder="Full Name" id="login-name">
+    </div>
+    <div class="form-group">
+      <span class="input-icon">📱</span>
+      <input type="tel" placeholder="+92 3XX XXXXXXX" id="login-mobile">
+    </div>
+    <div class="form-group">
+      <span class="input-icon">🔒</span>
+      <input type="password" placeholder="Password" id="login-pass">
+      <button class="pw-toggle" onclick="togglePassword('login-pass', this)" tabindex="-1">👁️</button>
+    </div>
+    <button class="auth-submit" onclick="handleUserLogin()">Login</button>
+    <div class="auth-divider"></div>
+    <div class="auth-footer-text">
+      Don't have an account? <a onclick="switchAuthTab('signup')">Sign Up</a>
+    </div>
+  </div>
+
+  <!-- Signup Form -->
+  <div class="auth-form hidden" id="form-signup">
+    <div class="form-group">
+      <span class="input-icon">👤</span>
+      <input type="text" placeholder="Full Name" id="signup-name">
+    </div>
+    <div class="form-group">
+      <span class="input-icon">📱</span>
+      <input type="tel" placeholder="+92 3XX XXXXXXX" id="signup-mobile">
+    </div>
+    <div class="form-group">
+      <span class="input-icon">🔒</span>
+      <input type="password" placeholder="Password" id="signup-pass">
+      <button class="pw-toggle" onclick="togglePassword('signup-pass', this)" tabindex="-1">👁️</button>
+    </div>
+    <div class="form-group">
+      <span class="input-icon">✓</span>
+      <input type="password" placeholder="Confirm Password" id="signup-confirm">
+      <button class="pw-toggle" onclick="togglePassword('signup-confirm', this)" tabindex="-1">👁️</button>
+    </div>
+    <button class="auth-submit" onclick="handleUserSignup()">Create Account</button>
+    <div class="auth-divider"></div>
+    <div class="auth-footer-text">
+      Already have an account? <a onclick="switchAuthTab('login')">Login</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ADMIN LOGIN POPUP ===== -->
+<div id="admin-login-overlay" onclick="closeAdminLoginPopup()"></div>
+<div id="admin-login-popup">
+  <button class="auth-close" onclick="closeAdminLoginPopup()">✕</button>
+  <span class="auth-crown" style="text-align:center;display:block;font-size:38px;margin-bottom:4px;filter:drop-shadow(0 0 15px rgba(255,215,0,0.2));">⚜</span>
+  <div class="admin-login-title">Admin Login</div>
+  <div class="admin-login-subtitle">✦ Authorized Access Only ✦</div>
+  <div class="form-group">
+    <span class="input-icon">✉️</span>
+    <input type="email" placeholder="Admin Email" id="admin-email">
+  </div>
+  <div class="form-group">
+    <span class="input-icon">🔒</span>
+    <input type="password" placeholder="Admin Password" id="admin-pass">
+    <button class="pw-toggle" onclick="togglePassword('admin-pass', this)" tabindex="-1">👁️</button>
+  </div>
+  <button class="auth-submit" onclick="handleAdminLogin()">Login to Dashboard</button>
+</div>
+
+<section class="hero">
+  <div class="royal-logo">
+    <span class="crown">👑</span>
+    <span class="crown-shield">⬡</span>
+  </div>
+  <div class="royal-name">Royal invest</div>
+  <div class="royal-divider"></div>
+  <p>"On the occasion of Eid-ul-Adha, Royal Invest brings you a great offer🌺<br>Complete easy tasks and earn money from the comfort of your home.<br>Create your account quickly and start earning today!"</p>
+  <div class="hero-glow"></div>
+</section>
+
+<section class='grid' id='plans'>
+<script>
+const plans = [
+  { amount: 'Rs.500',  daily: '125',  total: '3,750',    title: 'Starter' },
+  { amount: 'Rs.1,330', daily: '332',  total: '9,960',    title: 'Bronze' },
+  { amount: 'Rs.3,450', daily: '862', total: '25,860',  title: 'Silver' },
+  { amount: 'Rs.5,730', daily: '1,432', total: '42,960',  title: 'Gold' },
+  { amount: 'Rs.12,300', daily: '3,077', total: '92,910', title: 'Platinum' },
+  { amount: 'Rs.27,820', daily: '6,955', total: '208,650', title: 'Diamond' },
+  { amount: 'Rs.36,470', daily: '9,117', total: '275,310', title: 'Elite' },
+  { amount: 'Rs.47,110', daily: '11,777', total: '235,540', title: 'Royal' },
+  { amount: 'Rs.67,940', daily: '16,985', total: '509,550', title: 'Imperial' },
+  { amount: 'Rs.83,180', daily: '20,795', total: '623,850', title: 'Maharaja' },
+  { amount: 'Rs.134,720', daily: '33,680', total: '1,010,400', title: 'Sultan' },
+  { amount: 'Rs.150,000', daily: '37,500', total: '1,125,000', title: 'Emperor' }
+];
+
+document.write(plans.map((p, idx) => `
+  <div class='card'>
+    <div class='top'>
+      <div class="title-badge">✦ ${p.title} ✦</div>
+      <div class="invest-label">Royal Investment</div>
+      <div class="invest-value">${p.amount}</div>
+    </div>
+    <div class='content'>
+      <div class='row'>
+        <span class="label">Daily Profit</span>
+        <span class="value gold">Rs.${p.daily}</span>
+        <span class='icon'>📈</span>
+      </div>
+      <div class='row'>
+        <span class="label">Total Profit</span>
+        <span class="value green">Rs.${p.total}</span>
+        <span class='icon'>💰</span>
+      </div>
+      <div class='row'>
+        <span class="label">Duration</span>
+        <span class="value">30 Days</span>
+        <span class='icon'>⏳</span>
+      </div>
+      <a href='#' class='buy' onclick="openAuthPopup(event, ${idx})">Create Account</a>
+    </div>
+  </div>
+`).join(''));
+</script>
+</section>
+<section class='features'>
+<div class='feature'><h3>Secure</h3><p>100% safe & secure</p></div>
+<div class='feature'><h3>Instant Access</h3><p>Quick account activation</p></div>
+<div class='feature'><h3>24/7 Support</h3><p>We are here to help</p></div>
+<div class='feature'><h3>Trusted</h3><p>Trusted by thousands</p></div>
+</section>
+<footer>© 2026 All Rights Reserved.</footer>
+</div>
+<!-- ===== END LANDING PAGE ===== -->
+
+<!-- ===== IMAGE PREVIEW MODAL ===== -->
+<div id="img-preview-overlay" onclick="closeImgPreview()"></div>
+<div id="img-preview-modal">
+  <img id="preview-img-src" src="" alt="Preview">
+</div>
+
+<!-- ===== ADMIN DASHBOARD ===== -->
+<div class="dashboard-page" id="admin-dashboard">
+  <div class="dash-header">
+    <div class="dash-left">
+      <span style="font-size:24px;">⚜</span>
+      <span class="dash-logo">Admin Royal Dashboard</span>
+    </div>
+
+<!-- Admin Dashboard ke logout button mein -->
+<button onclick="handleLogout()">Logout
+
+  </div>
+
+  <div class="dash-container">
+<!-- 1. Assign Task -->
+<div class="dash-card">
+  <div class="dash-card-header">
+    <span class="card-icon">📋</span>
+    <h3>Assignment Task</h3>
+  </div>
+  <div class="dash-card-body">
+    <div class="dash-field">
+      <label>Select User</label>
+      <select id="task-user-select">
+        <option value="">Select User</option>
+      </select>
+    </div>
+    <div class="dash-field">
+      <label>Task Description</label>
+      <textarea id="task-desc" placeholder="Enter task description..."></textarea>
+    </div>
+    
+    <!-- ===== 📷 PICTURE UPLOAD FIELD ===== -->
+    <div class="dash-field">
+      <label>📷 Upload Task Picture <span style="color:rgba(255,255,255,0.3);font-size:11px;">(optional)</span></label>
+      <input type="file" id="task-image-input" accept="image/*" onchange="previewTaskImage(this)" style="width:100%;padding:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;color:#fff;font-size:12px;cursor:pointer;">
+      <img id="task-image-preview" style="display:none;max-width:100%;max-height:140px;margin-top:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);">
+    </div>
+    
+    <div class="dash-field">
+      <label>Target Plan</label>
+      <select id="task-plan-select">
+        <option value="">Select Plan</option>
+        <option value="0">Plan 0 - Starter</option>
+        <option value="1">Plan 1 - Bronze</option>
+        <option value="2">Plan 2 - Silver</option>
+        <option value="3">Plan 3 - Gold</option>
+        <option value="4">Plan 4 - Platinum</option>
+        <option value="5">Plan 5 - Diamond</option>
+        <option value="6">Plan 6 - Elite</option>
+        <option value="7">Plan 7 - Royal</option>
+        <option value="8">Plan 8 - Imperial</option>
+        <option value="9">Plan 9 - Maharaja</option>
+        <option value="10">Plan 10 - Sultan</option>
+        <option value="11">Plan 11 - Emperor</option>
+      </select>
+    </div>
+    <button class="dash-btn" onclick="assignTask()">📌 Assign Task</button>
+  </div>
+</div>
+
+    <!-- 2. All Tasks -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <span class="card-icon">📂</span>
+        <h3>All Tasks</h3>
+      </div>
+      <div class="dash-card-body" id="all-tasks-list">
+        <div style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;font-size:13px;">No tasks yet</div>
+      </div>
+    </div>
+
+    <!-- 3. Task Submissions (for verification) -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <span class="card-icon">✅</span>
+        <h3>Task Submissions</h3>
+      </div>
+      <div class="dash-card-body" id="completed-tasks-list">
+        <div style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;font-size:13px;">No submissions yet</div>
+      </div>
+    </div>
+
+    <!-- 4. Registered Users -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <span class="card-icon">👥</span>
+        <h3>Registered Users</h3>
+      </div>
+      <div class="dash-card-body" id="registered-users-list">
+        <div style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;font-size:13px;">No users yet</div>
+      </div>
+    </div>
+
+    <!-- 5. Payment Proofs -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <span class="card-icon">💳</span>
+        <h3>Payment Proofs</h3>
+      </div>
+      <div class="dash-card-body" id="payment-proofs-list">
+        <div style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;font-size:13px;">No proofs yet</div>
+      </div>
+    </div>
+
+    <!-- 6. Withdraw Requests -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <span class="card-icon">💰</span>
+        <h3>Withdraw Requests</h3>
+      </div>
+      <div class="dash-card-body" id="withdraw-requests-list">
+        <div style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;font-size:13px;">No withdrawals yet</div>
+      </div>
+    </div>
+
+    <!-- 7. Assign Account IDs -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <span class="card-icon">🆔</span>
+        <h3>Assign Account IDs</h3>
+      </div>
+      <div class="dash-card-body">
+        <div class="dash-field">
+          <label>User Mobile</label>
+          <input type="text" id="assign-id-mobile" placeholder="03XXXXXXXXX">
+        </div>
+        <div class="dash-field">
+          <label>Account ID</label>
+          <select id="assign-id-select">
+            <option value="">Select ID</option>
+            <option value="RI-001">RI-001</option>
+            <option value="RI-002">RI-002</option>
+            <option value="RI-003">RI-003</option>
+            <option value="RI-004">RI-004</option>
+            <option value="RI-005">RI-005</option>
+            <option value="RI-006">RI-006</option>
+            <option value="RI-007">RI-007</option>
+            <option value="RI-008">RI-008</option>
+            <option value="RI-009">RI-009</option>
+            <option value="RI-010">RI-010</option>
+          </select>
+        </div>
+        <button class="dash-btn green" onclick="assignAccountId()">🆔 Assign ID</button>
+        <div style="margin-top:14px;" id="assigned-ids-list">
+          <div style="text-align:center;color:rgba(255,255,255,0.3);padding:10px;font-size:13px;">No IDs assigned yet</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== USER DASHBOARD ===== -->
+<div class="dashboard-page" id="user-dashboard">
+  <div class="dash-header">
+    <div class="dash-left">
+      <div class="dash-user-info">
+        <div class="profile-icon">👤</div>
+        <span id="user-name-display">User</span>
+        <span style="color:rgba(255,255,255,0.3);font-size:12px;letter-spacing:1px;">|</span>
+        <span id="user-plan-display" style="color:#ffd700;font-size:13px;font-weight:700;letter-spacing:1px;"></span>
+        <span id="user-account-id" style="color:rgba(52,211,153,0.6);font-size:12px;letter-spacing:1px;margin-left:4px;"></span>
+      </div>
+    </div>
+    <!-- User Dashboard ke logout button mein -->
+<button onclick="handleLogout()">Logout</button>
+
+  </div>
+  
+  <div class="dash-container">
+    <!-- 1. Plan Summary -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <span class="card-icon">📋</span>
+        <h3>Your Plan Summary</h3>
+      </div>
+      <div class="dash-card-body">
+        <div class="balance-display">
+          <div style="font-size:14px;color:rgba(255,215,0,0.5);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;" id="user-plan-name">Starter</div>
+          <div class="balance-amount" id="user-plan-investment">Rs. 500</div>
+          <div class="balance-label">✦ Investment Amount ✦</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;">
+          <div style="text-align:center;padding:12px;background:rgba(255,215,0,0.04);border-radius:10px;border:1px solid rgba(255,215,0,0.08);">
+            <div style="font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:1px;text-transform:uppercase;">Daily Profit</div>
+            <div style="font-size:22px;font-weight:800;color:#ffd700;margin-top:6px;" id="user-daily-profit">Rs. 125</div>
+          </div>
+          <div style="text-align:center;padding:12px;background:rgba(52,211,153,0.04);border-radius:10px;border:1px solid rgba(52,211,153,0.08);">
+            <div style="font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:1px;text-transform:uppercase;">Total Profit</div>
+            <div style="font-size:22px;font-weight:800;color:#34d399;margin-top:6px;" id="user-total-profit">Rs. 3,750</div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+        <!-- 3. Payment Proof Upload -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <span class="card-icon">📤</span>
+        <h3>Send Payment Proof</h3>
+      </div>
+      <div class="dash-card-body" style="max-height:500px;">
+        <div class="payment-info">
+          <div class="payment-label">نیچے دیے گئے ایزی پیسہ نمبر پر اپنے انویسٹمنٹ پلان کے مطابق ادائیگی کریں<br>اور ادائیگی کا اسکرین شاٹ اپ لوڈ کر دیں۔</div>
+          <div class="payment-number"></div>
+        </div>
+        <div class="payment-info">
+          <div class="payment-label">Easypaisa</div>
+          <div class="payment-number">0348-6274445</div>
+        </div>
+        <div class="dash-field">
+          <label>Upload Screenshot</label>
+          <input type="file" id="payment-screenshot" accept="image/*" style="padding:10px;">
+        </div>
+        <button class="dash-btn" onclick="uploadPaymentProof()">📤 Upload Proof</button>
+        <div style="margin-top:20px;border-top:1px solid rgba(255,215,0,0.1);padding-top:16px;">
+          <h4 style="font-size:13px;color:rgba(255,215,0,0.5);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">My Uploads</h4>
+          <div id="my-uploads-list">
+            <div style="text-align:center;color:rgba(255,255,255,0.2);padding:10px;font-size:12px;">No uploads yet</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <!-- 🔔 Notifications Section -->
+  <div class="dash-card">
+    <div class="dash-card-header" style="display:flex;align-items:center;gap:8px;">
+      <span class="card-icon">🔔</span>
+      <h3>Withdraw Payment<br>Notifications</h3>
+      <span id="notif-badge" style="background:#ef4444;color:#fff;font-size:11px;padding:2px 8px;border-radius:12px;display:none;">0</span>
+    </div>
+    <div class="dash-card-body">
+      <div id="user-notifications-list" style="max-height:300px;overflow-y:auto;"></div>
+    </div>
+    
+  </div>
+
+    <!-- 2. Balance + Withdraw -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <span class="card-icon">💎</span>
+        <h3>Your Balance </h3>
+      </div>
+      <div class="dash-card-body">
+        <div class="balance-display">
+          <div class="balance-amount" id="user-balance">Rs. 0</div>
+          <div class="balance-label">✦ Current Balance ✦<br></div>
+        </div>
+        <div style="padding:16px;background:rgba(255,215,0,0.04);border-radius:12px;border:1px solid rgba(255,215,0,0.1);margin-top:10px;">
+          <div style="font-size:12px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">💰 Withdraw Funds<br>👉👉(AM / 9:00) to (PM / 8:00)</div>
+          <div class="dash-field" style="margin-bottom:8px;">
+            <input type="text" id="withdraw-name" placeholder="Full Name">
+          </div>
+          <div class="dash-field" style="margin-bottom:8px;">
+            <select id="withdraw-type">
+              <option value="Easypaisa">Easypaisa</option>
+            </select>
+          </div>
+          <div class="dash-field" style="margin-bottom:8px;">
+            <input type="text" id="withdraw-number" placeholder="03XXXXXXXXX">
+          </div>
+          <div class="dash-field" style="margin-bottom:8px;">
+            <input type="number" id="withdraw-amount" placeholder="Amount (PKR)">
+          </div>
+          <button class="dash-btn" onclick="submitWithdraw()">💸 Submit Withdraw</button>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- 4. Assigned Tasks -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <span class="card-icon">📌</span>
+        <h3>My Tasks</h3>
+      </div>
+      <div class="dash-card-body" id="user-tasks-list" style="max-height:450px;">
+        <div style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;font-size:13px;">No tasks assigned yet</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+// ===== DATA STORES =====
+let userAccounts = JSON.parse(localStorage.getItem('ri_users')) || [];
+let userBalances = JSON.parse(localStorage.getItem('ri_balances')) || {};
+let taskAssignments = JSON.parse(localStorage.getItem('ri_tasks')) || [];
+let paymentProofs = JSON.parse(localStorage.getItem('ri_proofs')) || [];
+let withdrawRequests = JSON.parse(localStorage.getItem('ri_withdraws')) || [];
+let assignedIds = JSON.parse(localStorage.getItem('ri_assigned_ids')) || [];
+let completedTasks = JSON.parse(localStorage.getItem('ri_completed_tasks')) || [];
+let userNotifications = JSON.parse(localStorage.getItem('ri_notifications')) || [];
+let currentUser = null;
+
+// ===== PLAN DATA =====
+const plansData = [
+  { title: 'Starter',  amount: 'Rs.500',  daily: '125',  total: '3,750' },
+  { title: 'Bronze',   amount: 'Rs.1,330', daily: '332',  total: '9,960' },
+  { title: 'Silver',   amount: 'Rs.3,450', daily: '862',  total: '25,860' },
+  { title: 'Gold',     amount: 'Rs.5,730', daily: '1,432', total: '42,960' },
+  { title: 'Platinum', amount: 'Rs.12,300', daily: '3,077', total: '92,910' },
+  { title: 'Diamond',  amount: 'Rs.27,820', daily: '6,955', total: '208,650' },
+  { title: 'Elite',    amount: 'Rs.36,470', daily: '9,117', total: '275,310' },
+  { title: 'Royal',    amount: 'Rs.47,110', daily: '11,777', total: '235,540' },
+  { title: 'Imperial', amount: 'Rs.67,940', daily: '16,985', total: '509,550' },
+  { title: 'Maharaja', amount: 'Rs.83,180', daily: '20,795', total: '623,850' },
+  { title: 'Sultan',   amount: 'Rs.134,720', daily: '33,680', total: '1,010,400' },
+  { title: 'Emperor',  amount: 'Rs.150,000', daily: '37,500', total: '1,125,000' }
+];
+
+const dailyProfitMap = {
+  0:125, 1:332, 2:862, 3:1432, 4:3077, 5:6955,
+  6:9117, 7:11777, 8:16985, 9:20795, 10:33680, 11:37500
+};
+
+const taskAmountMap = {
+  0:125, 1:332, 2:862, 3:1432, 4:3077, 5:6955,
+  6:9117, 7:11777, 8:16985, 9:20795, 10:33680, 11:37500
+};
+
+// ===== HELPERS =====
+function saveAll() {
+  localStorage.setItem('ri_users', JSON.stringify(userAccounts));
+  localStorage.setItem('ri_balances', JSON.stringify(userBalances));
+  localStorage.setItem('ri_tasks', JSON.stringify(taskAssignments));
+  localStorage.setItem('ri_proofs', JSON.stringify(paymentProofs));
+  localStorage.setItem('ri_withdraws', JSON.stringify(withdrawRequests));
+  localStorage.setItem('ri_assigned_ids', JSON.stringify(assignedIds));
+  localStorage.setItem('ri_completed_tasks', JSON.stringify(completedTasks));
+  localStorage.setItem('ri_notifications', JSON.stringify(userNotifications));
+}
+
+function generateId() {
+  return '_' + Math.random().toString(36).substr(2,9);
+}
+
+function getBalance(mobile) { return userBalances[mobile] || 0; }
+function setBalance(mobile, amt) { userBalances[mobile] = amt; saveAll(); }
+function addBalance(mobile, amt) { setBalance(mobile, getBalance(mobile) + amt); }
+
+function findUserByMobile(m) {
+  return userAccounts.find(u => u.mobile === m);
+}
+
+function isValidMobile(m) {
+  const c = m.replace(/[\s\-\(\)]/g,'');
+  return /^03\d{9}$/.test(c);
+}
+
+function normalizeMobile(m) { return m.replace(/[\s\-\(\)]/g,''); }
+
+// ===== TOAST =====
+function showToast(title, message, type) {
+  const c = document.getElementById('toast-container');
+  if(!c) return;
+  const t = document.createElement('div');
+  t.className = 'toast ' + type;
+  t.innerHTML = '<div class="toast-text"><div class="toast-title">' + title + '</div><div class="toast-msg">' + message + '</div></div>';
+  c.appendChild(t);
+  setTimeout(function() { t.style.animation = 'toastFadeOut 0.4s ease forwards'; setTimeout(function() { t.remove(); }, 400); }, 4000);
+}
+
+// ===== MENU =====
+function toggleMenu() {
+  var m = document.getElementById('menu');
+  var o = document.getElementById('menu-overlay');
+  var s = m.style.display;
+  m.style.display = s === 'block' ? 'none' : 'block';
+  o.style.display = s === 'block' ? 'none' : 'block';
+}
+function closeMenu() {
+  document.getElementById('menu').style.display = 'none';
+  document.getElementById('menu-overlay').style.display = 'none';
+}
+
+// ===== AUTH =====
+function openAuthPopup(e, planIndex) {
+  e.preventDefault();
+  window.selectedPlanIndex = planIndex;
+  document.getElementById('auth-overlay').style.display = 'block';
+  document.getElementById('auth-popup').style.display = 'block';
+  closeMenu();
+}
+function closeAuthPopup() {
+  document.getElementById('auth-overlay').style.display = 'none';
+  document.getElementById('auth-popup').style.display = 'none';
+}
+
+function switchAuthTab(tab) {
+  document.getElementById('form-login').classList.toggle('hidden', tab !== 'login');
+  document.getElementById('form-signup').classList.toggle('hidden', tab !== 'signup');
+  document.getElementById('tab-login').classList.toggle('active', tab === 'login');
+  document.getElementById('tab-signup').classList.toggle('active', tab === 'signup');
+}
+
+function togglePassword(fieldId, btn) {
+  var f = document.getElementById(fieldId);
+  if(!f) return;
+  f.type = f.type === 'password' ? 'text' : 'password';
+}
+
+// ===== SIGNUP =====
+function handleUserSignup() {
+  var name = document.getElementById('signup-name').value.trim();
+  var mobile = normalizeMobile(document.getElementById('signup-mobile').value.trim());
+  var pass = document.getElementById('signup-pass').value;
+  var confirm = document.getElementById('signup-confirm').value;
+
+  if(!name || !mobile || !pass || !confirm) {
+    showToast('Error', 'Please fill all fields', 'error'); return;
+  }
+  if(!isValidMobile(mobile)) {
+    showToast('Error', 'Enter a valid Pakistani mobile number (03XXXXXXXXX)', 'error'); return;
+  }
+  if(pass.length < 4) {
+    showToast('Error', 'Password must be at least 4 characters', 'error'); return;
+  }
+  if(pass !== confirm) {
+    showToast('Error', 'Passwords do not match', 'error'); return;
+  }
+  if(findUserByMobile(mobile)) {
+    showToast('Error', 'This mobile number is already registered', 'error'); return;
+  }
+
+  var planIndex = window.selectedPlanIndex !== undefined ? window.selectedPlanIndex : 0;
+
+  var newUser = {
+    id: generateId(),
+    name: name,
+    mobile: mobile,
+    pass: pass,
+    planIndex: planIndex,
+    createdAt: new Date().toISOString()
+  };
+
+  userAccounts.push(newUser);
+  userBalances[mobile] = 0;
+  saveAll();
+
+  showToast('Success', 'Account created! Welcome ' + name + '. You chose ' + plansData[planIndex].title + ' plan!', 'success');
+
+  currentUser = newUser;
+  localStorage.setItem('ri_loggedin', JSON.stringify({name:name, mobile:mobile}));
+  loadUserDashboard();
+  closeAuthPopup();
+}
+
+function handleUserLogin() {
+  var name = document.getElementById('login-name').value.trim();
+  var mobile = normalizeMobile(document.getElementById('login-mobile').value.trim());
+  var pass = document.getElementById('login-pass').value;
+
+  if(!name || !mobile || !pass) {
+    showToast('Error', 'Please fill all fields', 'error'); return;
+  }
+
+  var user = userAccounts.find(function(u) { return u.name === name && u.mobile === mobile && u.pass === pass; });
+  if(!user) {
+    showToast('Error', 'Invalid credentials. Please try again.', 'error'); return;
+  }
+
+  currentUser = user;
+  localStorage.setItem('ri_loggedin', JSON.stringify({name:user.name, mobile:user.mobile}));
+  showToast('Success', 'Welcome back, ' + user.name + '!', 'success');
+  loadUserDashboard();
+  closeAuthPopup();
+}
+
+// ===== ADMIN LOGIN =====
+function openAdminLogin() {
+  document.getElementById('admin-login-overlay').style.display = 'block';
+  document.getElementById('admin-login-popup').style.display = 'block';
+}
+function closeAdminLoginPopup() {
+  document.getElementById('admin-login-overlay').style.display = 'none';
+  document.getElementById('admin-login-popup').style.display = 'none';
+}
+function handleAdminLogin() {
+  var email = document.getElementById('admin-email').value.trim();
+  var pass = document.getElementById('admin-pass').value;
+
+  if(email === 'admin@1234.com' && pass === 'admin1234') {
+    showToast('Success', 'Welcome Admin!', 'success');
+    loadAdminDashboard();
+    closeAdminLoginPopup();
+  } else {
+    showToast('Error', 'Invalid admin credentials', 'error');
+  }
+}
+
+// ===== PAGE NAVIGATION =====
+function showPage(pageId) {
+  var pages = document.querySelectorAll('.dashboard-page');
+  for(var i = 0; i < pages.length; i++) { pages[i].classList.remove('active'); }
+  document.getElementById('landing-page').classList.add('hidden');
+  document.getElementById(pageId).classList.add('active');
+}
+
+function showLanding() {
+  var pages = document.querySelectorAll('.dashboard-page');
+  for(var i = 0; i < pages.length; i++) { pages[i].classList.remove('active'); }
+  document.getElementById('landing-page').classList.remove('hidden');
+}
+
+function handleLogout() {
+  localStorage.removeItem('ri_loggedin');
+  currentUser = null;
+  closeMenu();
+  showLanding();
+  showToast('Success', 'You have been logged out successfully!', 'success');
+}
+
+// ===== USER DASHBOARD =====
+function loadUserDashboard() {
+  showPage('user-dashboard');
+  var user = currentUser;
+  if(!user) return;
+
+  var pi = user.planIndex;
+  var plan = plansData[pi] || plansData[0];
+  var dp = dailyProfitMap[pi] || 0;
+
+  document.getElementById('user-name-display').textContent = user.name;
+  document.getElementById('user-plan-display').textContent = plan.title + ' Plan';
+
+  var aid = assignedIds.find(function(a) { return a.mobile === user.mobile; });
+  document.getElementById('user-account-id').textContent = aid ? '[' + aid.id + ']' : '';
+
+  document.getElementById('user-plan-name').textContent = plan.title;
+  document.getElementById('user-plan-investment').textContent = plan.amount.replace(',','');
+  document.getElementById('user-daily-profit').textContent = 'Rs. ' + dp.toLocaleString();
+  document.getElementById('user-total-profit').textContent = 'Rs. ' + plan.total;
+
+  var bal = getBalance(user.mobile);
+  document.getElementById('user-balance').textContent = 'Rs. ' + bal.toLocaleString();
+
+  renderUserTasks();
+  renderMyUploads();
+  renderUserNotifications();
+}
+
+// ===== USER NOTIFICATIONS =====
+function renderUserNotifications() {
+  var c = document.getElementById('user-notifications-list');
+  if(!c || !currentUser) return;
+
+  var myNotifs = userNotifications.filter(function(n) { return n.mobile === currentUser.mobile; });
+  
+  var badge = document.getElementById('notif-badge');
+  if(badge) {
+    var unread = 0;
+    for(var i = 0; i < myNotifs.length; i++) { if(!myNotifs[i].read) unread++; }
+    badge.textContent = unread;
+    badge.style.display = unread > 0 ? 'flex' : 'none';
+  }
+
+  if(myNotifs.length === 0) {
+    c.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.2);padding:10px;font-size:12px;">No notifications yet</div>';
+    return;
+  }
+
+  var html = '';
+  for(var i = myNotifs.length - 1; i >= 0; i--) {
+    var n = myNotifs[i];
+    html += '<div class="dash-item" style="margin-bottom:8px;' + (n.read ? 'opacity:0.6;' : 'border-left:3px solid #34d399;') + '">';
+    html += '<div class="item-row"><span class="item-label">' + n.title + '</span><span class="item-value" style="font-size:12px;">' + new Date(n.createdAt).toLocaleString() + '</span></div>';
+    html += '<div style="font-size:13px;color:rgba(255,255,255,0.7);margin-top:4px;">' + n.message + '</div>';
+    if(n.paymentImage) {
+      html += '<img src="' + n.paymentImage + '" class="preview-img" onclick="openImgPreview(\'' + n.paymentImage + '\')" style="max-width:100%;max-height:120px;margin-top:6px;border-radius:8px;cursor:pointer;">';
+    }
+    if(!n.read) {
+      html += '<button class="dash-btn" style="font-size:10px;padding:5px 10px;margin-top:4px;" onclick="markNotifRead(\'' + n.id + '\')">Mark as Read</button>';
+    }
+    html += '</div>';
+  }
+  c.innerHTML = html;
+}
+
+function markNotifRead(id) {
+  var n = userNotifications.find(function(x) { return x.id === id; });
+  if(n) { n.read = true; saveAll(); renderUserNotifications(); }
+}
+
+// ===== USER TASKS =====
+function renderUserTasks() {
+  var c = document.getElementById('user-tasks-list');
+  if(!c || !currentUser) return;
+
+  var myTasks = completedTasks.filter(function(t) { return t.mobile === currentUser.mobile; });
+  var adminTasks = taskAssignments.filter(function(t) {
+    return t.assignedTo === currentUser.mobile || (t.targetPlan !== undefined && t.targetPlan == currentUser.planIndex);
+  });
+
+  if(adminTasks.length === 0) {
+    c.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;font-size:13px;">No tasks assigned yet</div>';
+    return;
+  }
+
+  var html = '';
+  for(var i = 0; i < adminTasks.length; i++) {
+    var t = adminTasks[i];
+    var isCompleted = false;
+    var ct = null;
+    for(var j = 0; j < myTasks.length; j++) {
+      if(myTasks[j].taskId === t.id) { isCompleted = true; ct = myTasks[j]; break; }
+    }
+    
+    var picHtml = '';
+    if(t.taskImage) {
+      picHtml = '<div class="item-row" style="margin-top:6px;"><span class="item-label">Task Picture</span><div style="margin-top:4px;"><img src="' + t.taskImage + '" class="preview-img" onclick="openImgPreview(\'' + t.taskImage + '\')" style="max-width:100%;max-height:160px;border-radius:8px;cursor:pointer;"></div></div>';
+    }
+
+    html += '<div class="dash-item">';
+    html += '<div class="item-row"><span class="item-label">Task</span><span class="item-value">' + (t.desc || t.description || 'Complete your task') + '</span></div>';
+    html += picHtml;
+    
+    if(isCompleted) {
+      html += '<div class="item-row" style="margin-top:8px;"><span class="item-label">Submitted Screenshot</span><div style="margin-top:4px;">';
+      if(ct && ct.screenshot) {
+        html += '<img src="' + ct.screenshot + '" class="preview-img" onclick="openImgPreview(\'' + ct.screenshot + '\')" style="max-width:100%;max-height:120px;border-radius:8px;cursor:pointer;">';
+      } else {
+        html += '<span class="item-value" style="font-size:13px;">' + (ct ? ct.answer : 'Submitted') + '</span>';
+      }
+      html += '</div></div>';
+      html += '<div class="item-row"><span class="item-label">Status</span><span class="status-badge ' + (ct && ct.status === 'approved' ? 'approved' : 'pending') + '">' + (ct ? ct.status : 'pending') + '</span></div>';
+    } else {
+      html += '<button class="dash-btn" style="margin-top:8px;font-size:11px;padding:10px;" onclick="showTaskSubmitForm(\'' + t.id + '\', this)">📝 Submit Task</button>';
+    }
+    html += '</div>';
+  }
+  c.innerHTML = html;
+}
+
+// ===== TASK SUBMIT FORM =====
+function showTaskSubmitForm(taskId, btn) {
+  var item = btn.parentElement;
+  var div = document.createElement('div');
+  div.innerHTML = '<div class="dash-field" style="margin-top:8px;"><label style="font-size:12px;color:rgba(255,255,255,0.6);display:block;margin-bottom:4px;">Upload Screenshot (optional)</label><input type="file" id="task-screenshot-' + taskId + '" accept="image/*" style="width:100%;padding:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;color:#fff;font-size:12px;"><div id="screenshot-preview-' + taskId + '" style="margin-top:6px;display:none;"><img id="screenshot-preview-img-' + taskId + '" style="max-width:100%;max-height:120px;border-radius:6px;"></div></div><div class="dash-field" style="margin-top:6px;"><textarea id="task-answer-' + taskId + '" placeholder="Enter your task answer / notes..." style="min-height:50px;"></textarea></div><button class="dash-btn green" style="font-size:11px;padding:10px;" onclick="submitTaskAnswer(\'' + taskId + '\')">✅ Submit Answer</button><button class="dash-btn red" style="font-size:11px;padding:10px;margin-top:4px;" onclick="cancelTaskSubmit(this)">✕ Cancel</button>';
+  btn.replaceWith(div);
+
+  var fileInput = document.getElementById('task-screenshot-' + taskId);
+  if(fileInput) {
+    fileInput.addEventListener('change', function(e) {
+      var file = e.target.files[0];
+      if(file) {
+        var reader = new FileReader();
+        reader.onload = function(ev) {
+          var previewDiv = document.getElementById('screenshot-preview-' + taskId);
+          var previewImg = document.getElementById('screenshot-preview-img-' + taskId);
+          if(previewDiv && previewImg) {
+            previewImg.src = ev.target.result;
+            previewDiv.style.display = 'block';
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+}
+
+function cancelTaskSubmit(btn) {
+  var parent = btn.parentElement;
+  var backBtn = document.createElement('button');
+  backBtn.className = 'dash-btn';
+  backBtn.style.cssText = 'margin-top:8px;font-size:11px;padding:10px;';
+  backBtn.textContent = '📝 Submit Task';
+  var ta = parent.querySelector('textarea');
+  if(ta) {
+    var tid = ta.id.replace('task-answer-', '');
+    backBtn.onclick = function(){ showTaskSubmitForm(tid, backBtn); };
+  }
+  parent.replaceWith(backBtn);
+}
+
+function submitTaskAnswer(taskId) {
+  if(!currentUser) return;
+  
+  var answer = document.getElementById('task-answer-' + taskId);
+  var fileInput = document.getElementById('task-screenshot-' + taskId);
+  
+  if(!answer || !answer.value.trim()) {
+    showToast('Error', 'Please enter your task answer', 'error'); return;
+  }
+
+  if(fileInput && fileInput.files && fileInput.files[0]) {
+    var file = fileInput.files[0];
+    if(!file.type.startsWith('image/')) {
+      showToast('Error', 'Only image files are allowed for screenshot', 'error'); return;
+    }
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      saveTaskSubmission(taskId, answer.value.trim(), e.target.result);
+    };
+    reader.readAsDataURL(file);
+  } else {
+    saveTaskSubmission(taskId, answer.value.trim(), null);
+  }
+}
+
+function saveTaskSubmission(taskId, answerText, screenshotData) {
+  var existing = null;
+  for(var i = 0; i < completedTasks.length; i++) {
+    if(completedTasks[i].taskId === taskId && completedTasks[i].mobile === currentUser.mobile) {
+      existing = completedTasks[i]; break;
+    }
+  }
+  
+  if(existing) {
+    existing.answer = answerText;
+    if(screenshotData) existing.screenshot = screenshotData;
+    existing.status = 'pending';
+  } else {
+    completedTasks.push({
+      id: generateId(),
+      taskId: taskId,
+      mobile: currentUser.mobile,
+      name: currentUser.name,
+      answer: answerText,
+      screenshot: screenshotData || null,
+      status: 'pending',
+      submittedAt: new Date().toISOString()
+    });
+  }
+  saveAll();
+  showToast('Success', '✅ Task submitted successfully! Waiting for admin approval.', 'success');
+  renderUserTasks();
+}
+
+// ===== MY UPLOADS =====
+function renderMyUploads() {
+  var c = document.getElementById('my-uploads-list');
+  if(!c || !currentUser) return;
+
+  var myUploads = paymentProofs.filter(function(p) { return p.mobile === currentUser.mobile; });
+  if(myUploads.length === 0) {
+    c.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.2);padding:10px;font-size:12px;">No uploads yet</div>';
+    return;
+  }
+
+  var html = '';
+  for(var i = 0; i < myUploads.length; i++) {
+    var p = myUploads[i];
+    html += '<div class="dash-item" style="margin-bottom:10px;">';
+    html += '<div class="item-row"><span class="item-label">Status</span><span class="status-badge ' + (p.status === 'verified' ? 'verified' : 'unverified') + '">' + (p.status || 'pending') + '</span></div>';
+    if(p.image) { html += '<img src="' + p.image + '" class="preview-img" onclick="openImgPreview(\'' + p.image + '\')" style="margin-top:6px;">'; }
+    html += '<div style="font-size:11px;color:rgba(255,255,255,0.2);margin-top:4px;">' + new Date(p.submittedAt).toLocaleString() + '</div>';
+    html += '</div>';
+  }
+  c.innerHTML = html;
+}
+
+// ===== IMAGE PREVIEW =====
+function openImgPreview(src) {
+  document.getElementById('preview-img-src').src = src;
+  document.getElementById('img-preview-overlay').style.display = 'block';
+  document.getElementById('img-preview-modal').style.display = 'block';
+}
+function closeImgPreview() {
+  document.getElementById('img-preview-overlay').style.display = 'none';
+  document.getElementById('img-preview-modal').style.display = 'none';
+}
+
+// ===== PAYMENT PROOF UPLOAD =====
+function uploadPaymentProof() {
+  if(!currentUser) {
+    showToast('Error', 'Please login first', 'error'); return;
+  }
+
+  var fileInput = document.getElementById('payment-screenshot');
+  if(!fileInput.files || !fileInput.files[0]) {
+    showToast('Error', 'Please select a screenshot image', 'error'); return;
+  }
+
+  var file = fileInput.files[0];
+  if(!file.type.startsWith('image/')) {
+    showToast('Error', 'Only image files are allowed', 'error'); return;
+  }
+
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    paymentProofs.push({
+      id: generateId(),
+      mobile: currentUser.mobile,
+      name: currentUser.name,
+      image: e.target.result,
+      status: 'pending',
+      submittedAt: new Date().toISOString()
+    });
+    saveAll();
+    showToast('Success', 'Payment proof uploaded! Admin will verify soon.', 'success');
+    fileInput.value = '';
+    renderMyUploads();
+  };
+  reader.readAsDataURL(file);
+}
+
+// ===== WITHDRAW (with instant notification) =====
+function submitWithdraw() {
+  if(!currentUser) {
+    showToast('Error', 'Please login first', 'error'); return;
+  }
+
+  var name = document.getElementById('withdraw-name').value.trim();
+  var type = document.getElementById('withdraw-type').value;
+  var number = document.getElementById('withdraw-number').value.trim();
+  var amount = parseInt(document.getElementById('withdraw-amount').value);
+
+  if(!name || !number || !amount) {
+    showToast('Error', 'Please fill all withdraw fields', 'error'); return;
+  }
+  if(amount < 100) {
+    showToast('Error', 'Minimum withdraw is Rs. 100', 'error'); return;
+  }
+  var bal = getBalance(currentUser.mobile);
+  if(amount > bal) {
+    showToast('Error', 'Insufficient balance. You have Rs. ' + bal.toLocaleString(), 'error'); return;
+  }
+
+  var withdrawId = generateId();
+  withdrawRequests.push({
+    id: withdrawId,
+    name: name,
+    method: type,
+    number: number,
+    amount: amount,
+    mobile: currentUser.mobile,
+    status: 'pending',
+    submittedAt: new Date().toISOString()
+  });
+
+  addBalance(currentUser.mobile, -amount);
+  saveAll();
+
+  // ===== 🔔 INSTANT NOTIFICATION FOR USER (PENDING) =====
+  var notif = {
+    id: generateId(),
+    mobile: currentUser.mobile,
+    title: '💸 Withdraw Request Submitted (Pending)',
+    message: 'Your withdraw request of Rs. ' + amount.toLocaleString() + ' via ' + type + ' (' + number + ') has been submitted. Waiting for admin approval.',
+    paymentImage: null,
+    read: false,
+    createdAt: new Date().toISOString()
+  };
+  userNotifications.push(notif);
+  saveAll();
+
+  showToast('Success', 'Withdraw request of Rs. ' + amount.toLocaleString() + ' submitted!', 'success');
+  document.getElementById('withdraw-name').value = '';
+  document.getElementById('withdraw-number').value = '';
+  document.getElementById('withdraw-amount').value = '';
+
+  loadUserDashboard();
+}
+
+// ==================================================================
+// ===== ADMIN DASHBOARD =====
+// ==================================================================
+function loadAdminDashboard() {
+  showPage('admin-dashboard');
+  renderAdminUsers();
+  renderAllTasks();
+  renderCompletedTasks();
+  renderPaymentProofs();
+  renderWithdrawals();
+  renderAssignedIds();
+}
+
+// ===== ADMIN: ASSIGN TASK =====
+function assignTask() {
+  var userSelect = document.getElementById('task-user-select');
+  var desc = document.getElementById('task-desc').value.trim();
+  var planSelect = document.getElementById('task-plan-select');
+  var fileInput = document.getElementById('task-image-input');
+
+  var assignedTo = userSelect.value;
+  var targetPlan = planSelect.value;
+
+  if(!desc) {
+    showToast('Error', 'Please enter a task description', 'error'); return;
+  }
+
+  if(fileInput && fileInput.files && fileInput.files[0]) {
+    var file = fileInput.files[0];
+    if(!file.type.startsWith('image/')) {
+      showToast('Error', 'Only image files are allowed', 'error'); return;
+    }
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      createTask(desc, assignedTo, targetPlan, e.target.result);
+    };
+    reader.readAsDataURL(file);
+  } else {
+    createTask(desc, assignedTo, targetPlan, null);
+  }
+}
+
+function createTask(desc, assignedTo, targetPlan, taskImage) {
+  var task = {
+    id: generateId(),
+    description: desc,
+    desc: desc,
+    taskImage: taskImage,
+    assignedTo: assignedTo,
+    targetPlan: targetPlan !== '' ? parseInt(targetPlan) : undefined,
+    assignedAt: new Date().toISOString()
+  };
+
+  taskAssignments.push(task);
+  saveAll();
+
+  showToast('Success', '✅ Task assigned successfully!', 'success');
+
+  document.getElementById('task-desc').value = '';
+  document.getElementById('task-image-input').value = '';
+  var preview = document.getElementById('task-image-preview');
+  if(preview) {
+    preview.style.display = 'none';
+    preview.src = '';
+  }
+  document.getElementById('task-user-select').value = '';
+  document.getElementById('task-plan-select').value = '';
+
+  renderAllTasks();
+}
+
+function previewTaskImage(input) {
+  var preview = document.getElementById('task-image-preview');
+  if(!preview) return;
+  if(input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      preview.src = e.target.result;
+      preview.style.display = 'block';
+    };
+    reader.readAsDataURL(input.files[0]);
+  } else {
+    preview.style.display = 'none';
+    preview.src = '';
+  }
+}
+
+// ===== ADMIN: RENDER ALL TASKS =====
+function renderAllTasks() {
+  var c = document.getElementById('all-tasks-list');
+  if(!c) return;
+
+  if(taskAssignments.length === 0) {
+    c.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;font-size:13px;">No tasks yet</div>';
+    return;
+  }
+
+  var html = '';
+  for(var i = 0; i < taskAssignments.length; i++) {
+    var t = taskAssignments[i];
+    var target = 'All Users';
+    if(t.assignedTo) {
+      var u = findUserByMobile(t.assignedTo);
+      if(u) target = u.name;
+    } else if(t.targetPlan !== undefined && t.targetPlan !== null && t.targetPlan !== '') {
+      target = plansData[t.targetPlan].title + ' Plan';
+    }
+    
+    html += '<div class="dash-item">';
+    html += '<div class="item-row"><span class="item-label">Task</span><span class="item-value">' + (t.description || t.desc) + '</span></div>';
+    html += '<div class="item-row"><span class="item-label">Target</span><span class="item-value" style="color:#ffd700;">' + target + '</span></div>';
+    if(t.taskImage) {
+      html += '<div class="item-row"><span class="item-label">Picture</span><div style="margin-top:4px;"><img src="' + t.taskImage + '" class="preview-img" onclick="openImgPreview(\'' + t.taskImage + '\')" style="max-width:100%;max-height:100px;border-radius:6px;cursor:pointer;"></div></div>';
+    }
+    html += '<div class="item-row"><span class="item-label">Assigned</span><span class="item-value" style="font-size:12px;color:rgba(255,255,255,0.4);">' + new Date(t.assignedAt).toLocaleString() + '</span></div>';
+    html += '</div>';
+  }
+  c.innerHTML = html;
+}
+
+// ===== ADMIN: COMPLETED TASKS =====
+function renderCompletedTasks() {
+  var c = document.getElementById('completed-tasks-list');
+  if(!c) return;
+
+  if(completedTasks.length === 0) {
+    c.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;font-size:13px;">No submissions yet</div>';
+    return;
+  }
+
+  var html = '';
+  for(var i = 0; i < completedTasks.length; i++) {
+    var ct = completedTasks[i];
+    var user = findUserByMobile(ct.mobile);
+    var planIdx = user ? user.planIndex : 0;
+    var taskAmt = taskAmountMap[planIdx] || 0;
+    
+    html += '<div class="dash-item">';
+    html += '<div class="item-row"><span class="item-label">User</span><span class="item-value">' + ct.name + '</span></div>';
+    if(ct.screenshot) {
+      html += '<div class="item-row"><span class="item-label">Screenshot</span><div style="margin-top:4px;"><img src="' + ct.screenshot + '" class="preview-img" onclick="openImgPreview(\'' + ct.screenshot + '\')" style="max-width:100%;max-height:100px;border-radius:6px;cursor:pointer;"></div></div>';
+    }
+    html += '<div class="item-row"><span class="item-label">Answer</span><span class="item-value" style="font-size:13px;">' + ct.answer + '</span></div>';
+    html += '<div class="item-row"><span class="item-label">Status</span><span class="status-badge ' + (ct.status === 'approved' ? 'approved' : 'pending') + '">' + ct.status + '</span></div>';
+    if(ct.status === 'approved') {
+      html += '<div class="item-row"><span class="item-label">Amount Paid</span><span class="item-value green">Rs. ' + taskAmt.toLocaleString() + '</span></div>';
+    }
+    if(ct.status !== 'approved') {
+      html += '<div class="item-row" style="margin-top:6px;">';
+      html += '<button class="dash-btn green" style="font-size:11px;padding:8px;flex:1;" onclick="approveTask(\'' + ct.id + '\')">✅ Approve (Rs. ' + taskAmt.toLocaleString() + ')</button>';
+      html += '<button class="dash-btn red" style="font-size:11px;padding:8px;flex:1;" onclick="rejectTask(\'' + ct.id + '\')">✕ Reject</button>';
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+  c.innerHTML = html;
+}
+
+// ===== APPROVE/REJECT TASK =====
+function approveTask(id) {
+  var ct = null;
+  for(var i = 0; i < completedTasks.length; i++) {
+    if(completedTasks[i].id === id) { ct = completedTasks[i]; break; }
+  }
+  if(!ct) return;
+  ct.status = 'approved';
+
+  var user = findUserByMobile(ct.mobile);
+  if(user) {
+    var planIdx = user.planIndex;
+    var amount = taskAmountMap[planIdx] || 0;
+    addBalance(ct.mobile, amount);
+    showToast('Success', 'Task approved! Rs. ' + amount.toLocaleString() + ' added to ' + ct.name + "'s balance", 'success');
+  }
+
+  saveAll();
+  renderCompletedTasks();
+  if(currentUser && currentUser.mobile === ct.mobile) {
+    loadUserDashboard();
+  }
+}
+
+function rejectTask(id) {
+  var ct = null;
+  for(var i = 0; i < completedTasks.length; i++) {
+    if(completedTasks[i].id === id) { ct = completedTasks[i]; break; }
+  }
+  if(!ct) return;
+  ct.status = 'rejected';
+  saveAll();
+  showToast('Warning', 'Task rejected for ' + ct.name, 'warning');
+  renderCompletedTasks();
+}
+
+// ===== ADMIN: PAYMENT PROOFS =====
+function renderPaymentProofs() {
+  var c = document.getElementById('payment-proofs-list');
+  if(!c) return;
+
+  if(paymentProofs.length === 0) {
+    c.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;font-size:13px;">No proofs yet</div>';
+    return;
+  }
+
+  var html = '';
+  for(var i = 0; i < paymentProofs.length; i++) {
+    var p = paymentProofs[i];
+    html += '<div class="dash-item">';
+    html += '<div class="item-row"><span class="item-label">User</span><span class="item-value">' + p.name + '</span></div>';
+    if(p.image) { html += '<img src="' + p.image + '" class="preview-img" onclick="openImgPreview(\'' + p.image + '\')" style="margin-bottom:8px;">'; }
+    html += '<div class="item-row"><span class="item-label">Status</span><span class="status-badge ' + (p.status === 'verified' ? 'verified' : 'unverified') + '">' + p.status + '</span></div>';
+    if(p.status !== 'verified') {
+      html += '<div class="item-row" style="margin-top:6px;">';
+      html += '<button class="dash-btn green" style="font-size:11px;padding:8px;flex:1;" onclick="verifyPaymentProof(\'' + p.id + '\')">✅ Verify</button>';
+      html += '<button class="dash-btn red" style="font-size:11px;padding:8px;flex:1;" onclick="rejectPaymentProof(\'' + p.id + '\')">✕ Delete</button>';
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+  c.innerHTML = html;
+}
+
+function verifyPaymentProof(id) {
+  var p = null;
+  for(var i = 0; i < paymentProofs.length; i++) {
+    if(paymentProofs[i].id === id) { p = paymentProofs[i]; break; }
+  }
+  if(!p) return;
+  p.status = 'verified';
+  saveAll();
+  showToast('Success', 'Payment proof verified for ' + p.name, 'success');
+  renderPaymentProofs();
+}
+
+function rejectPaymentProof(id) {
+  paymentProofs = paymentProofs.filter(function(x) { return x.id !== id; });
+  saveAll();
+  showToast('Warning', 'Payment proof removed', 'warning');
+  renderPaymentProofs();
+}
+
+// ================================================================
+// ===== ADMIN: WITHDRAWALS =====
+// ================================================================
+function renderWithdrawals() {
+  var c = document.getElementById('withdraw-requests-list');
+  if(!c) return;
+
+  if(withdrawRequests.length === 0) {
+    c.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;font-size:13px;">No withdrawals yet</div>';
+    return;
+  }
+
+  var html = '';
+  for(var i = 0; i < withdrawRequests.length; i++) {
+    var w = withdrawRequests[i];
+    var user = findUserByMobile(w.mobile);
+    
+    html += '<div class="dash-item">';
+    html += '<div class="item-row"><span class="item-label">User</span><span class="item-value">' + (w.name || (user ? user.name : w.mobile)) + '</span></div>';
+    html += '<div class="item-row"><span class="item-label">Method</span><span class="item-value">' + w.method + '</span></div>';
+    html += '<div class="item-row"><span class="item-label">Number</span><span class="item-value">' + w.number + '</span></div>';
+    html += '<div class="item-row"><span class="item-label">Amount</span><span class="item-value gold">Rs. ' + w.amount.toLocaleString() + '</span></div>';
+    html += '<div class="item-row"><span class="item-label">Status</span><span class="status-badge ' + (w.status === 'completed' ? 'approved' : 'pending') + '">' + (w.status === 'completed' ? 'approved' : w.status) + '</span></div>';
+    
+    if(w.paymentScreenshot) {
+      html += '<div class="item-row"><span class="item-label">Payment Screenshot</span><div style="margin-top:4px;"><img src="' + w.paymentScreenshot + '" class="preview-img" onclick="openImgPreview(\'' + w.paymentScreenshot + '\')" style="max-width:100%;max-height:100px;border-radius:6px;cursor:pointer;"></div></div>';
+    }
+    
+    if(w.status !== 'completed') {
+      html += '<div class="item-row" style="margin-top:6px;">';
+      html += '<div class="dash-field" style="margin-bottom:6px;">';
+      html += '<label style="font-size:11px;color:rgba(255,255,255,0.5);">📷 Upload Payment Screenshot</label>';
+      html += '<input type="file" id="payment-screenshot-' + w.id + '" accept="image/*" style="width:100%;padding:6px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;color:#fff;font-size:11px;"></div>';
+      html += '<button class="dash-btn green" style="font-size:11px;padding:8px;flex:1;" onclick="completeWithdraw(\'' + w.id + '\')">✅ Complete & Send</button>';
+      html += '<button class="dash-btn red" style="font-size:11px;padding:8px;flex:1;" onclick="cancelWithdraw(\'' + w.id + '\')">✕ Cancel & Refund</button>';
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+  c.innerHTML = html;
+}
+
+function completeWithdraw(id) {
+  var w = null;
+  for(var i = 0; i < withdrawRequests.length; i++) {
+    if(withdrawRequests[i].id === id) { w = withdrawRequests[i]; break; }
+  }
+  if(!w) return;
+
+  var fileInput = document.getElementById('payment-screenshot-' + id);
+  
+  if(fileInput && fileInput.files && fileInput.files[0]) {
+    var file = fileInput.files[0];
+    if(!file.type.startsWith('image/')) {
+      showToast('Error', 'Please upload an image as payment proof', 'error');
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      w.paymentScreenshot = e.target.result;
+      w.status = 'completed';
+      saveAll();
+      sendWithdrawNotification(w);
+      showToast('Success', '✅ Withdraw of Rs. ' + w.amount.toLocaleString() + ' approved!', 'success');
+      if(fileInput) { fileInput.value = ''; }
+      renderWithdrawals();
+    };
+    reader.readAsDataURL(file);
+  } else {
+    w.status = 'completed';
+    saveAll();
+    sendWithdrawNotification(w);
+    showToast('Success', '✅ Withdraw of Rs. ' + w.amount.toLocaleString() + ' approved!', 'success');
+    if(fileInput) { fileInput.value = ''; }
+    renderWithdrawals();
+  }
+}
+
+function sendWithdrawNotification(w) {
+  var notif = {
+    id: generateId(),
+    mobile: w.mobile,
+    title: '💸 Withdraw Approved',
+    message: 'Your withdraw of Rs. ' + w.amount.toLocaleString() + ' via ' + w.method + ' (' + w.number + ') has been approved successfully!',
+    paymentImage: w.paymentScreenshot || null,
+    read: false,
+    createdAt: new Date().toISOString()
+  };
+  userNotifications.push(notif);
+  saveAll();
+}
+
+function cancelWithdraw(id) {
+  var w = null;
+  for(var i = 0; i < withdrawRequests.length; i++) {
+    if(withdrawRequests[i].id === id) { w = withdrawRequests[i]; break; }
+  }
+  if(!w) return;
+  addBalance(w.mobile, w.amount);
+  w.status = 'cancelled';
+  saveAll();
+  showToast('Warning', 'Withdraw cancelled. Rs. ' + w.amount.toLocaleString() + ' refunded.', 'warning');
+  renderWithdrawals();
+}
+
+// ===== ADMIN: ASSIGN ACCOUNT ID =====
+function assignAccountId() {
+  var mobile = normalizeMobile(document.getElementById('assign-id-mobile').value.trim());
+  var id = document.getElementById('assign-id-select').value;
+
+  if(!mobile || !id) {
+    showToast('Error', 'Please enter mobile and select an ID', 'error'); return;
+  }
+
+  var user = findUserByMobile(mobile);
+  if(!user) {
+    showToast('Error', 'User not found with this mobile number', 'error'); return;
+  }
+
+  var existing = assignedIds.find(function(a) { return a.mobile === mobile || a.id === id; });
+  if(existing) {
+    showToast('Error', 'This user or ID is already assigned', 'error'); return;
+  }
+
+  assignedIds.push({ mobile: mobile, id: id, assignedAt: new Date().toISOString() });
+  saveAll();
+  showToast('Success', 'Account ID ' + id + ' assigned to ' + user.name, 'success');
+  document.getElementById('assign-id-mobile').value = '';
+  document.getElementById('assign-id-select').value = '';
+  renderAssignedIds();
+  renderAdminUsers();
+}
+
+function renderAssignedIds() {
+  var c = document.getElementById('assigned-ids-list');
+  if(!c) return;
+
+  if(assignedIds.length === 0) {
+    c.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.3);padding:10px;font-size:13px;">No IDs assigned yet</div>';
+    return;
+  }
+
+  var html = '';
+  for(var i = 0; i < assignedIds.length; i++) {
+    var a = assignedIds[i];
+    var user = findUserByMobile(a.mobile);
+    html += '<div class="dash-item" style="margin-bottom:8px;padding:10px;">';
+    html += '<div class="item-row"><span class="item-label">ID</span><span class="item-value gold">' + a.id + '</span></div>';
+    html += '<div class="item-row"><span class="item-label">User</span><span class="item-value">' + (user ? user.name : a.mobile) + '</span></div>';
+    html += '</div>';
+  }
+  c.innerHTML = html;
+}
+
+function populateUserSelect() {
+  var sel = document.getElementById('task-user-select');
+  if(!sel) return;
+  var options = '<option value="">All Users</option>';
+  for(var i = 0; i < userAccounts.length; i++) {
+    var u = userAccounts[i];
+    options += '<option value="' + u.mobile + '">' + u.name + ' (' + u.mobile + ') - ' + plansData[u.planIndex].title + '</option>';
+  }
+  sel.innerHTML = options;
+}
+
+function renderAdminUsers() {
+  var c = document.getElementById('registered-users-list');
+  if(!c) return;
+
+  populateUserSelect();
+
+  if(userAccounts.length === 0) {
+    c.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;font-size:13px;">No users yet</div>';
+    return;
+  }
+
+  var html = '';
+  for(var i = 0; i < userAccounts.length; i++) {
+    var u = userAccounts[i];
+    var pi = u.planIndex;
+    var plan = plansData[pi] || plansData[0];
+    var bal = getBalance(u.mobile);
+    var aid = assignedIds.find(function(a) { return a.mobile === u.mobile; });
+    var sub = paymentProofs.filter(function(p) { return p.mobile === u.mobile; });
+    var wd = withdrawRequests.filter(function(w) { return w.mobile === u.mobile; });
+    
+    html += '<div class="dash-item">';
+    html += '<div class="item-row"><span class="item-label">Name</span><span class="item-value">' + u.name + '</span></div>';
+    html += '<div class="item-row"><span class="item-label">Mobile</span><span class="item-value">' + u.mobile + '</span></div>';
+    html += '<div class="item-row"><span class="item-label">Plan</span><span class="item-value gold">' + plan.title + ' (' + plan.amount + ')</span></div>';
+    html += '<div class="item-row"><span class="item-label">Balance</span><span class="item-value green">Rs. ' + bal.toLocaleString() + '</span></div>';
+    html += '<div class="item-row"><span class="item-label">Account ID</span><span class="item-value" style="color:' + (aid ? '#34d399' : 'rgba(255,255,255,0.3)') + '">' + (aid ? aid.id : 'Not assigned') + '</span></div>';
+    html += '<div class="item-row"><span class="item-label">Proofs / Withdraws</span><span class="item-value" style="font-size:12px;">📤' + sub.length + ' 💸' + wd.length + '</span></div>';
+    html += '<div class="item-row"><span class="item-label">Joined</span><span class="item-value" style="font-size:12px;color:rgba(255,255,255,0.4);">' + new Date(u.createdAt).toLocaleDateString() + '</span></div>';
+    html += '</div>';
+  }
+  c.innerHTML = html;
+}
+
+// ===== CHECK SESSION =====
+(function() {
+  var s = JSON.parse(localStorage.getItem('ri_loggedin'));
+  if(s) {
+    var user = findUserByMobile(s.mobile);
+    if(user) {
+      currentUser = user;
+      loadUserDashboard();
+    } else {
+      localStorage.removeItem('ri_loggedin');
+    }
+  }
+})();
+
+// ===== CLOSE POPUPS ON ESC =====
+document.addEventListener('keydown', function(e) {
+  if(e.key === 'Escape') {
+    closeAuthPopup();
+    closeAdminLoginPopup();
+    closeMenu();
+    closeImgPreview();
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  var authOverlay = document.getElementById('auth-overlay');
+  var adminOverlay = document.getElementById('admin-login-overlay');
+  var imgOverlay = document.getElementById('img-preview-overlay');
+  
+  if(authOverlay) authOverlay.addEventListener('click', closeAuthPopup);
+  if(adminOverlay) adminOverlay.addEventListener('click', closeAdminLoginPopup);
+  if(imgOverlay) imgOverlay.addEventListener('click', closeImgPreview);
+});
+
+console.log('Royal Invest - Complete with picture upload, notifications & pending status');
+console.log('Admin credentials: admin@1234.com / admin1234');
+
+</script>
+
+</body>
+</html>
